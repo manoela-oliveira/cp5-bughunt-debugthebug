@@ -1,18 +1,18 @@
 # Checkpoint 5 — Bug Hunt PetFiap
 
-> Copie este arquivo para a raiz do seu repositório com o nome **README.md**
-> e preencha todas as seções.
+> **Professor:** Ygor Moraes Martins dos Anjos
+---
 
 ## Identificação
 
-**Grupo:** ___
+**Grupo:** debugthebug
 
 | Integrante | RM | Turma |
 |---|---|---|
-| | | |
-| | | |
-| | | |
-| | | |
+|Felipe Rodrigues Ribeiro | RM565274 | 2CCPW |
+|Guilherme Ferraz de Medeiros | RM564743 | 2CCPW |
+|Manoela Oliveira Bello | RM563952 | 2CCPW |
+|Roberto Marques Moreira | RM564935 | 2CCPW |
 
 | Campo | |
 |---|---|
