@@ -1,20 +1,26 @@
 package br.com.fiap.petfiap.controller;
 
-import br.com.fiap.petfiap.exception.AtendimentoNaoEncontradoException;
-import br.com.fiap.petfiap.exception.HorarioOcupadoException;
-import br.com.fiap.petfiap.exception.StatusInvalidoException;
-import br.com.fiap.petfiap.builder.AtendimentoBuilder;
-import br.com.fiap.petfiap.model.Atendimento;
-import br.com.fiap.petfiap.model.GeradorProtocolo;
-import br.com.fiap.petfiap.service.AgendaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.com.fiap.petfiap.builder.AtendimentoBuilder;
+import br.com.fiap.petfiap.exception.AtendimentoNaoEncontradoException;
+import br.com.fiap.petfiap.exception.HorarioOcupadoException;
+import br.com.fiap.petfiap.exception.StatusInvalidoException;
+import br.com.fiap.petfiap.model.Atendimento;
+import br.com.fiap.petfiap.model.GeradorProtocolo;
+import br.com.fiap.petfiap.service.AgendaService;
 
 @RestController
 @RequestMapping("/api/atendimentos")
@@ -103,11 +109,4 @@ public class AtendimentoController {
         }
     }
 
-    // -----------------------------------------------------------------
-    // Fidelidade (futuro) - implementar quando o time aprovar:
-    // - desconto de 10% para tutores com mais de 500 pontos
-    // - dobro de pontos em novembro amarelo (castracao)
-    private double calcularDescontoFidelidade(int pontos) {
-        return pontos * 0.1;
-    }
 }
