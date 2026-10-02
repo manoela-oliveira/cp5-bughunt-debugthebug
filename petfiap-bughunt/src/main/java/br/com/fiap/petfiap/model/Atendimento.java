@@ -3,17 +3,25 @@ package br.com.fiap.petfiap.model;
 import java.time.LocalDateTime;
 
 import br.com.fiap.petfiap.exception.StatusInvalidoException;
+import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 
 // Atendimento do PetFiap: banho, tosa ou consulta veterinaria.
 // As regras de preco, pontos e duracao moram nas subclasses (polimorfismo).
 @Entity
 @Table(name = "atendimentos")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_atendimento")
 public abstract class Atendimento {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int protocolo;
