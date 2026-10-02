@@ -1,5 +1,6 @@
 package br.com.fiap.petfiap.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class AgendaService {
 
     // Agenda um novo atendimento: recusa horario ja ocupado pelo mesmo pet.
     public Atendimento agendar(Atendimento novo) {
+        if (novo.getDataHora() == null || novo.getDataHora().isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Nao e permitido agendar em data/hora no passado");
+        }
+
         List<Atendimento> doPet = repository.findByPetNome(novo.getPetNome());
         for (Atendimento a : doPet) {
             if (a.getPetNome().equals(novo.getPetNome()) && a.getDataHora().isEqual(novo.getDataHora())
@@ -27,8 +32,7 @@ public class AgendaService {
                         "Pet " + novo.getPetNome() + " ja possui atendimento agendado nesse horario");
             }
         }
-        Atendimento salvo = repository.save(novo);
-        return salvo;
+        return repository.save(novo);
     }
 
     // Busca pelo id; nunca retorna null, o orElseThrow garante a excecao.
