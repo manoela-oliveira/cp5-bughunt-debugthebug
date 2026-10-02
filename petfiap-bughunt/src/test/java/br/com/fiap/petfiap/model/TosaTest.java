@@ -1,10 +1,9 @@
 package br.com.fiap.petfiap.model;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 // Testes unitarios do model: sem banco, sem Spring (Aula 15).
 public class TosaTest {
@@ -29,5 +28,17 @@ public class TosaTest {
 
         // Assert
         assertEquals(70.0, preco, 0.001);
+    }
+
+    @Test
+    public void deveDurar60Minutos() {
+        // Arrange
+        Tosa tosa = tosaDoRex();
+
+        // Act
+        int duracao = tosa.getDuracaoMinutos();
+
+        // Assert
+        assertEquals(60, duracao);
     }
 }
