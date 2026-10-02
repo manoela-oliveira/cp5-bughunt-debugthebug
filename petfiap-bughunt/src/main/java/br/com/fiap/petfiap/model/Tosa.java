@@ -1,8 +1,8 @@
 package br.com.fiap.petfiap.model;
 
-import jakarta.persistence.Entity;
-
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
 
 // Tosa: preco por porte, 30 pontos, 60 minutos.
 @Entity
@@ -37,7 +37,9 @@ public class Tosa extends Atendimento {
         return 30;
     }
 
-    public int getDuracaoMinutos(String porte) {
+    // Correção: remove String porte e adiciona @Override a fim de não violar o contrato estabelecido na classe mãe
+    @Override
+    public int getDuracaoMinutos() {
         return 60;
     }
 }
