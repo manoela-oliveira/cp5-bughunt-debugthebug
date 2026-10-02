@@ -1,10 +1,9 @@
 package br.com.fiap.petfiap.model;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 // Testes unitarios do model: sem banco, sem Spring (Aula 15).
 public class ConsultaVeterinariaTest {
@@ -29,5 +28,17 @@ public class ConsultaVeterinariaTest {
 
         // Assert
         assertEquals(30, duracao);
+    }
+
+    @Test
+    public void deveCobrarPrecoFixoIndependenteDoPorte() {
+        // Arrange
+        ConsultaVeterinaria consulta = consultaDaMimi();
+
+        // Act
+        double preco = consulta.calcularPreco();
+
+        // Assert: preco fixo da tabela de 150.0
+        assertEquals(150.0, preco, 0.001);
     }
 }
