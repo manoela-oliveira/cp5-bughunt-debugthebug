@@ -1,8 +1,8 @@
 package br.com.fiap.petfiap.model;
 
-import jakarta.persistence.Entity;
-
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
 
 // Consulta veterinaria: preco fixo (independe do porte), 50 pontos, 30 minutos.
 @Entity
@@ -13,8 +13,9 @@ public class ConsultaVeterinaria extends Atendimento {
     public ConsultaVeterinaria() {
     }
 
+    // Correção: ajusta super() para repassar todos os campos definidos como parâmetro
     public ConsultaVeterinaria(int protocolo, String petNome, String petPorte, String tutorNome, LocalDateTime dataHora) {
-        super();
+        super(protocolo, petNome, petPorte, tutorNome, dataHora);
     }
 
     @Override
