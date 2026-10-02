@@ -1,9 +1,11 @@
 package br.com.fiap.petfiap.model;
 
-import br.com.fiap.petfiap.exception.StatusInvalidoException;
-import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
+
+import br.com.fiap.petfiap.exception.StatusInvalidoException;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 // Atendimento do PetFiap: banho, tosa ou consulta veterinaria.
 // As regras de preco, pontos e duracao moram nas subclasses (polimorfismo).
@@ -69,19 +71,14 @@ public abstract class Atendimento {
     public void setId(Long id) { this.id = id; }
 
     public int getProtocolo() { return protocolo; }
-    public void setProtocolo(int protocolo) { this.protocolo = protocolo; }
 
     public String getPetNome() { return petNome; }
-    public void setPetNome(String petNome) { this.petNome = petNome; }
 
     public String getPetPorte() { return petPorte; }
-    public void setPetPorte(String petPorte) { this.petPorte = petPorte; }
 
     public String getTutorNome() { return tutorNome; }
-    public void setTutorNome(String tutorNome) { this.tutorNome = tutorNome; }
 
     public LocalDateTime getDataHora() { return dataHora; }
-    public void setDataHora(LocalDateTime dataHora) { this.dataHora = dataHora; }
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
