@@ -1,9 +1,9 @@
 package br.com.fiap.petfiap.builder;
 
+import java.time.LocalDateTime;
+
 import br.com.fiap.petfiap.factory.AtendimentoFactory;
 import br.com.fiap.petfiap.model.Atendimento;
-
-import java.time.LocalDateTime;
 
 // Padrao Builder (Aula 14): monta um atendimento complexo passo a passo,
 // sem construtor gigante no controller.
@@ -21,7 +21,7 @@ public class AtendimentoBuilder {
     }
 
     public AtendimentoBuilder comPet(String petNome, String petPorte) {
-        petNome = petNome;
+        this.petNome = petNome;
         this.petPorte = petPorte;
         return this;
     }
