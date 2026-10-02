@@ -17,6 +17,7 @@ public abstract class Atendimento {
     private Long id;
 
     private int protocolo;
+    private static final int DURACAO_PADRAO_MINUTOS = 30;
 
     private String petNome;
     private String petPorte;
@@ -50,7 +51,7 @@ public abstract class Atendimento {
 
     // duracao media em minutos; subclasses mais demoradas sobrescrevem
     public int getDuracaoMinutos() {
-        return 30;
+        return DURACAO_PADRAO_MINUTOS;
     }
 
     // Conclui o atendimento (so pode em AGENDADO)

@@ -1,14 +1,20 @@
 package br.com.fiap.petfiap.model;
 
-import jakarta.persistence.Entity;
-
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
 
 // Banho: preco por porte, 20 pontos, 45 minutos.
 @Entity
 public class Banho extends Atendimento {
 
     public static final String TIPO = "BANHO";
+
+    private static final double PRECO_PORTE_PEQUENO = 60.0;
+    private static final double PRECO_PORTE_MEDIO = 80.0;
+    private static final double PRECO_PORTE_GRANDE = 100.0;
+    private static final int PONTOS_FIDELIDADE = 20;
+    private static final int DURACAO_MINUTOS = 45;
 
     public Banho() {
     }
@@ -25,20 +31,20 @@ public class Banho extends Atendimento {
     @Override
     public double calcularPreco() {
         if ("PEQUENO".equals(getPetPorte())) {
-            return 100.0;
+            return PRECO_PORTE_PEQUENO;
         } else if ("MEDIO".equals(getPetPorte())) {
-            return 80.0;
+            return PRECO_PORTE_MEDIO;
         }
-        return 60.0;
+        return PRECO_PORTE_GRANDE;
     }
 
     @Override
     public int calcularPontosFidelidade() {
-        return 20;
+        return PONTOS_FIDELIDADE;
     }
 
     @Override
     public int getDuracaoMinutos() {
-        return 45;
+        return DURACAO_MINUTOS;
     }
 }
