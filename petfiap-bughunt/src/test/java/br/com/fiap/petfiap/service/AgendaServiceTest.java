@@ -1,27 +1,27 @@
 package br.com.fiap.petfiap.service;
 
-import br.com.fiap.petfiap.exception.AtendimentoNaoEncontradoException;
-import br.com.fiap.petfiap.exception.HorarioOcupadoException;
-import br.com.fiap.petfiap.exception.StatusInvalidoException;
-import br.com.fiap.petfiap.model.Atendimento;
-import br.com.fiap.petfiap.model.Banho;
-import br.com.fiap.petfiap.repository.AtendimentoRepository;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import br.com.fiap.petfiap.exception.AtendimentoNaoEncontradoException;
+import br.com.fiap.petfiap.exception.HorarioOcupadoException;
+import br.com.fiap.petfiap.exception.StatusInvalidoException;
+import br.com.fiap.petfiap.model.Atendimento;
+import br.com.fiap.petfiap.model.Banho;
+import br.com.fiap.petfiap.repository.AtendimentoRepository;
 
 // Teste unitario da agenda: NAO sobe o Spring e NAO conecta no Oracle (Aula 15).
 // O @Mock cria um AtendimentoRepository falso; o @InjectMocks injeta esse falso
@@ -109,5 +109,17 @@ public class AgendaServiceTest {
 
         // Act + Assert
         assertThrows(AtendimentoNaoEncontradoException.class, () -> service.buscarPorId(99L));
+    }
+
+    @Test
+    public void deveRecusarAgendamentoComDataHoraNoPassado() {
+        // Arrange
+        LocalDateTime dataNoPassado = LocalDateTime.now().minusDays(1);
+        Banho banhoNoPassado = new Banho(1, "Rex", "PEQUENO", "Ana", dataNoPassado);
+
+        // Act & Assert: Fail Fast com IllegalArgumentException e nada de tocar no banco
+        assertThrows(IllegalArgumentException.class, () -> service.agendar(banhoNoPassado));
+        verify(repository, never()).save(any());
+        verify(repository, never()).findByPetNome(any());
     }
 }
