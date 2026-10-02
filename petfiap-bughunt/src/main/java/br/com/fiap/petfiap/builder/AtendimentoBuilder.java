@@ -36,9 +36,17 @@ public class AtendimentoBuilder {
         return this;
     }
 
-    // A validacao dos campos obrigatorios fica por conta do controller,
-    // que conhece a regra de negocio do PetFiap.
+    /* 
+    Correção: aplicação do conceito Fail Fast, validação e do padrão Builder para garantir que o objeto nasça válido e não
+    permita a passagem de dados inválidos.
+    */
     public Atendimento construir(int protocolo) {
-        return AtendimentoFactory.criar(protocolo, tipo, petNome, petPorte, tutorNome, dataHora);
+    if (this.petNome == null || this.petNome.isBlank()) {
+        throw new IllegalArgumentException("Nome do pet e obrigatorio");
     }
+    if (this.petPorte == null || this.petPorte.isBlank()) {
+        throw new IllegalArgumentException("Porte do pet e obrigatorio");
+    }
+    return AtendimentoFactory.criar(protocolo, tipo, petNome, petPorte, tutorNome, dataHora);
+}
 }
