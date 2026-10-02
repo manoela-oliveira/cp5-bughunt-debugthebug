@@ -62,8 +62,12 @@ public abstract class Atendimento {
         status = "CONCLUIDO";
     }
 
-    // Cancela o atendimento
+    // Cancela o atendimento 
+    // Correção: so permite o concelamento em AGENDADO
     public void cancelar() {
+        if (!"AGENDADO".equals(status)) {
+            throw new StatusInvalidoException("Atendimento " + protocolo + " nao pode ser cancelado: status " + status);
+        }
         status = "CANCELADO";
     }
 
